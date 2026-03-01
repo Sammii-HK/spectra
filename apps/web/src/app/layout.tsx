@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Spectra — Audio-Reactive Shader Visualiser",
+  title: "Spectra: Audio-Reactive Shader Visualiser",
   description: "Real-time GLSL shaders driven by microphone input",
 };
 
