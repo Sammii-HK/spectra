@@ -1,17 +1,283 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root {
+  color-scheme: dark;
+}
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
-
-html,
 body {
+  margin: 0;
+  background: #08090c;
+  color: #f5f3ef;
+  font-family: Arial, sans-serif;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #e4c8ff;
+  outline-offset: 5px;
+}
+button,
+a {
+  min-height: 44px;
+}
+.spectra-studio {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.shader-stage {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.shader-stage canvas {
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  background: #000;
+}
+.spectra-studio:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(8, 9, 12, 0.85), rgba(8, 9, 12, 0.1)),
+    linear-gradient(0deg, rgba(8, 9, 12, 0.9), transparent 40%);
+  pointer-events: none;
+}
+.studio-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.8rem 3rem;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.55rem;
+  letter-spacing: -0.06em;
+  font-weight: 600;
+}
+.wordmark > svg {
+  color: #ddc3f1;
+}
+.wordmark > span {
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  margin-left: 1rem;
+  color: #c7c3ce;
+}
+.portfolio-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #d4cfda;
+}
+.studio-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 4rem 7vw 5rem;
+}
+.intro-panel {
+  max-width: 620px;
+  padding: 2rem;
+  background: rgba(8, 9, 12, 0.82);
+  border: 1px solid #ffffff1f;
+  border-radius: 1rem;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.65rem;
+  color: #d3bdde;
+  margin: 0 0 1.5rem;
+}
+h1 {
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  letter-spacing: -0.065em;
+  font-weight: 400;
+  line-height: 1.04;
+  margin: 0;
+}
+.intro-copy {
+  max-width: 370px;
+  font-size: 0.93rem;
+  line-height: 1.8;
+  color: #d3ced8;
+  margin: 1.8rem 0;
+}
+.studio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.studio-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: 1px solid #8f8398;
+  border-radius: 2rem;
+  background: #1b1721;
+  color: #ece5f1;
+  padding: 0.8rem 1.15rem;
+  font-size: 0.75rem;
+}
+.studio-actions .primary-action {
+  background: #e7d5f1;
+  border-color: #e7d5f1;
+  color: #251c2a;
+}
+.privacy-note {
+  font-size: 0.7rem;
+  line-height: 1.8;
+  color: #bfb7c9;
+  max-width: 345px;
+  margin: 1.2rem 0 0;
+}
+.error-note {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: #ffcdc4;
+  max-width: 430px;
+}
+.studio-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.5rem 3rem;
+  border-top: 1px solid #ffffff20;
+}
+.studio-status {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.7rem;
+  color: #cfc5d8;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a99ab3;
+}
+.status-dot.active {
+  background: #bfe2a5;
+}
+.meters {
+  display: flex;
+  gap: 1.2rem;
+}
+.meter {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.meter label {
+  font-size: 0.65rem;
+  color: #c6b8d1;
+  min-width: 25px;
+}
+.meter meter {
+  width: 64px;
+  height: 7px;
+  accent-color: #dfb6fb;
+}
+.meter meter::-webkit-meter-bar {
+  background: #43394d;
+  border: 0;
+}
+.meter meter::-webkit-meter-optimum-value {
+  background: #dfb6fb;
+}
+@media (max-width: 600px) {
+  .studio-header {
+    padding: 1rem 1.25rem;
+  }
+  .wordmark > span {
+    display: none;
+  }
+  .wordmark {
+    font-size: 1.3rem;
+  }
+  .studio-content {
+    padding: 2rem 1rem 3rem;
+    align-items: flex-start;
+  }
+  .intro-panel {
+    padding: 1.35rem;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  .intro-copy {
+    font-size: 0.85rem;
+    max-width: 300px;
+  }
+  .studio-footer {
+    padding: 1.3rem 1.5rem;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .studio-actions {
+    align-items: stretch;
+    flex-direction: column;
+    max-width: 300px;
+  }
+  .studio-actions button {
+    min-height: 48px;
+  }
+  .meters {
+    gap: 1rem;
+  }
+  .meter meter {
+    width: 48px;
+  }
+  .privacy-note {
+    max-width: 290px;
+  }
+  .spectra-studio:before {
+    background: linear-gradient(
+      90deg,
+      rgba(8, 9, 12, 0.88),
+      rgba(8, 9, 12, 0.4)
+    );
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
