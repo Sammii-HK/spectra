@@ -20,5 +20,3 @@ pnpm -C apps/web start --port 4820
 ```
 
 The interface uses Lucide icons and a Lucide-derived favicon. The normal lint and test commands include the shared icon guard. Audio tests use synthetic frequency buffers and mocked browser resources; they do not request access to a real microphone.
-
-See `docs/quality/product-review-20261120.md` for verified scope and remaining checks.
