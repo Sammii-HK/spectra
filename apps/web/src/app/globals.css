@@ -2,15 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 :root {
-  color-scheme: dark;
+  color-scheme: light dark;
+  --page: #08090c;
+  --ink: #f5f3ef;
+  --focus: #e4c8ff;
+  --stage-veil:
+    linear-gradient(90deg, rgba(8, 9, 12, 0.85), rgba(8, 9, 12, 0.1)),
+    linear-gradient(0deg, rgba(8, 9, 12, 0.9), transparent 40%);
+  --stage-veil-narrow: linear-gradient(
+    90deg,
+    rgba(8, 9, 12, 0.88),
+    rgba(8, 9, 12, 0.4)
+  );
+  --wordmark-icon: #ddc3f1;
+  --wordmark-note: #c7c3ce;
+  --link: #d4cfda;
+  --panel: rgba(8, 9, 12, 0.82);
+  --panel-line: #ffffff1f;
+  --eyebrow: #d3bdde;
+  --body-copy: #d3ced8;
+  --button-line: #8f8398;
+  --button: #1b1721;
+  --button-ink: #ece5f1;
+  --primary: #e7d5f1;
+  --primary-ink: #251c2a;
+  --quiet-copy: #bfb7c9;
+  --error: #ffcdc4;
+  --footer-line: #ffffff20;
+  --status: #cfc5d8;
+  --dot: #a99ab3;
+  --dot-active: #bfe2a5;
+  --meter-label: #c6b8d1;
+  --meter-fill: #dfb6fb;
+  --meter-track: #43394d;
+}
+/* Light scheme: the same studio on lavender paper. The shader stays a dark
+   art stage, framed as a window between the header and footer. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --page: #f5f2f7;
+    --ink: #1c1621;
+    --focus: #7b3fb0;
+    --stage-veil: none;
+    --stage-veil-narrow: none;
+    --wordmark-icon: #7a3fae;
+    --wordmark-note: #5d5566;
+    --link: #4a4253;
+    --panel: rgba(252, 250, 253, 0.94);
+    --panel-line: rgba(255, 255, 255, 0.6);
+    --eyebrow: #74468f;
+    --body-copy: #463f4e;
+    --button-line: #8b7c98;
+    --button: #f1ebf5;
+    --button-ink: #2a2131;
+    --primary: #3b2350;
+    --primary-ink: #f7effc;
+    --quiet-copy: #5f5768;
+    --error: #a3271a;
+    --footer-line: #ddd5e3;
+    --status: #4f4757;
+    --dot: #8c7e98;
+    --dot-active: #4f8a2c;
+    --meter-label: #5a4f64;
+    --meter-fill: #8a4cc2;
+    --meter-track: #ddd3e6;
+  }
+  .shader-stage {
+    background: #08090c;
+  }
+  /* Header and footer sit on the paper, above the framed stage window. */
+  .studio-header,
+  .studio-footer {
+    position: relative;
+    z-index: 1;
+  }
+  .studio-content {
+    margin: 0 clamp(0.75rem, 2vw, 1.5rem);
+    border-radius: 1.25rem;
+    box-shadow:
+      0 0 0 1px rgba(28, 22, 33, 0.14),
+      0 0 0 100vmax var(--page);
+  }
+  .intro-panel {
+    box-shadow: 0 24px 60px -30px rgba(8, 9, 12, 0.7);
+  }
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  background: #08090c;
-  color: #f5f3ef;
+  background: var(--page);
+  color: var(--ink);
   font-family: Arial, sans-serif;
 }
 button,
@@ -31,7 +114,7 @@ button:disabled {
 }
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #e4c8ff;
+  outline: 2px solid var(--focus);
   outline-offset: 5px;
 }
 button,
@@ -61,9 +144,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    linear-gradient(90deg, rgba(8, 9, 12, 0.85), rgba(8, 9, 12, 0.1)),
-    linear-gradient(0deg, rgba(8, 9, 12, 0.9), transparent 40%);
+  background: var(--stage-veil);
   pointer-events: none;
 }
 .studio-header {
@@ -82,21 +163,21 @@ a {
   font-weight: 600;
 }
 .wordmark > svg {
-  color: #ddc3f1;
+  color: var(--wordmark-icon);
 }
 .wordmark > span {
   font-size: 0.7rem;
   letter-spacing: 0.02em;
   font-weight: 400;
   margin-left: 1rem;
-  color: #c7c3ce;
+  color: var(--wordmark-note);
 }
 .portfolio-link {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.75rem;
-  color: #d4cfda;
+  color: var(--link);
 }
 .studio-content {
   display: flex;
@@ -107,15 +188,15 @@ a {
 .intro-panel {
   max-width: 620px;
   padding: 2rem;
-  background: rgba(8, 9, 12, 0.82);
-  border: 1px solid #ffffff1f;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
   border-radius: 1rem;
 }
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-size: 0.65rem;
-  color: #d3bdde;
+  color: var(--eyebrow);
   margin: 0 0 1.5rem;
 }
 h1 {
@@ -129,7 +210,7 @@ h1 {
   max-width: 370px;
   font-size: 0.93rem;
   line-height: 1.8;
-  color: #d3ced8;
+  color: var(--body-copy);
   margin: 1.8rem 0;
 }
 .studio-actions {
@@ -142,29 +223,29 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  border: 1px solid #8f8398;
+  border: 1px solid var(--button-line);
   border-radius: 2rem;
-  background: #1b1721;
-  color: #ece5f1;
+  background: var(--button);
+  color: var(--button-ink);
   padding: 0.8rem 1.15rem;
   font-size: 0.75rem;
 }
 .studio-actions .primary-action {
-  background: #e7d5f1;
-  border-color: #e7d5f1;
-  color: #251c2a;
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-ink);
 }
 .privacy-note {
   font-size: 0.7rem;
   line-height: 1.8;
-  color: #bfb7c9;
+  color: var(--quiet-copy);
   max-width: 345px;
   margin: 1.2rem 0 0;
 }
 .error-note {
   font-size: 0.8rem;
   line-height: 1.7;
-  color: #ffcdc4;
+  color: var(--error);
   max-width: 430px;
 }
 .studio-footer {
@@ -173,23 +254,23 @@ h1 {
   justify-content: space-between;
   gap: 2rem;
   padding: 1.5rem 3rem;
-  border-top: 1px solid #ffffff20;
+  border-top: 1px solid var(--footer-line);
 }
 .studio-status {
   display: flex;
   align-items: center;
   gap: 0.65rem;
   font-size: 0.7rem;
-  color: #cfc5d8;
+  color: var(--status);
 }
 .status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #a99ab3;
+  background: var(--dot);
 }
 .status-dot.active {
-  background: #bfe2a5;
+  background: var(--dot-active);
 }
 .meters {
   display: flex;
@@ -202,20 +283,20 @@ h1 {
 }
 .meter label {
   font-size: 0.65rem;
-  color: #c6b8d1;
+  color: var(--meter-label);
   min-width: 25px;
 }
 .meter meter {
   width: 64px;
   height: 7px;
-  accent-color: #dfb6fb;
+  accent-color: var(--meter-fill);
 }
 .meter meter::-webkit-meter-bar {
-  background: #43394d;
+  background: var(--meter-track);
   border: 0;
 }
 .meter meter::-webkit-meter-optimum-value {
-  background: #dfb6fb;
+  background: var(--meter-fill);
 }
 @media (max-width: 600px) {
   .studio-header {
@@ -265,11 +346,7 @@ h1 {
     max-width: 290px;
   }
   .spectra-studio:before {
-    background: linear-gradient(
-      90deg,
-      rgba(8, 9, 12, 0.88),
-      rgba(8, 9, 12, 0.4)
-    );
+    background: var(--stage-veil-narrow);
   }
 }
 @media (prefers-reduced-motion: reduce) {
